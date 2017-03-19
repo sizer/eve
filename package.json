@@ -1,0 +1,23 @@
+{
+  "name": "circle-ci-sample",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mrdShinse/circle-ci-sample.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mrdShinse/circle-ci-sample/issues"
+  },
+  "homepage": "https://github.com/mrdShinse/circle-ci-sample#readme",
+  "dependencies": {
+    "express": "^4.15.2",
+    "supertest": "^3.0.0"
+  }
+}
