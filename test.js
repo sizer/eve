@@ -6,6 +6,6 @@ describe('/', () => {
         request(app)
             .get('/')
             .expect(200, res)
-            .expect('hello', res.body)
+            .expect('{"message":"hello ci environment."}', res.body)
     });
 });
