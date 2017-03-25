@@ -1,8 +1,12 @@
+import * as bodyParser from "body-parser";
 import * as express from "express";
 import * as request from "request";
 import { LineMessagingApi } from "./infra/LineMessageingApi";
 
 const app = express();
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
     res.status(200).json({ message: "this is eve-linebot." });
