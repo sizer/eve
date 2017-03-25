@@ -12,7 +12,7 @@ export class LineMessagingApi {
 
     public isSignatureValid(req: any): boolean {
         return req.headers["X-Line-Signature"]
-            === crypto.createHmac("SHA256", this.channelSecret).update(req.body).digest("base64");
+            === crypto.createHmac("SHA256", this.channelSecret).update(JSON.stringify(req.body)).digest("base64");
     }
 
     public isTextMessage(event: any): boolean {
