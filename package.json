@@ -2,7 +2,7 @@
   "name": "eve-linebot",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "./dist/app/app.js",
   "scripts": {
     "clean": "rimraf ./dist",
     "lint": "tslint -c ./tslint.json ./app/**/*.ts ./test/**/*.ts",
