@@ -1,25 +1,34 @@
 {
-  "name": "circle-ci-sample",
-  "version": "1.0.0",
+  "name": "eve-linebot",
+  "version": "1.0.0-dev",
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "mocha test.js",
-    "start": "node ./app.js"
+    "clean": "rimraf ./dist",
+    "lint": "tslint -c ./tslint.json ./app/**/*.ts ./test/**/*.ts",
+    "compile": "npm run clean && npm run lint && tsc -p ./tsconfig.json",
+    "test": "npm run compile && mocha ./dist/test/**/*.test.js",
+    "start": "npm run test && node ./dist/app/app.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mrdShinse/circle-ci-sample.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "mrdShinse",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/mrdShinse/circle-ci-sample/issues"
   },
   "homepage": "https://github.com/mrdShinse/circle-ci-sample#readme",
   "dependencies": {
+    "@types/mocha": "^2.2.40",
+    "@types/node": "^7.0.11",
     "express": "^4.15.2",
-    "supertest": "^3.0.0"
+    "request": "^2.81.0",
+    "rimraf": "^2.6.1",
+    "supertest": "^3.0.0",
+    "tslint": "^4.5.1",
+    "typescript": "^2.2.1"
   },
   "engines": {
     "node": "v6.9.X",

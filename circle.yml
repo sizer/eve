@@ -1,6 +1,6 @@
 test:
   override:
-    - npm test
+    - npm run test
 deployment:
   staging:
     branch: master
