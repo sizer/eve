@@ -1,7 +1,8 @@
 import * as crypto from "crypto";
 import * as request from "request";
+import { IMessagingPlatform } from "../domain/IMessagingPlatform";
 
-export class LineMessagingApi {
+export class MessagingPlatformLINE implements IMessagingPlatform {
 
     private static LINE_MESSAGE_API_URL_BASE: string = "https://api.line.me/v2/bot/message";
     private channelSecret: string;
@@ -37,7 +38,7 @@ export class LineMessagingApi {
                 "Content-Type": "application/json; charset=UTF-8",
             },
             json: true,
-            url: LineMessagingApi.LINE_MESSAGE_API_URL_BASE + "/reply",
+            url: MessagingPlatformLINE.LINE_MESSAGE_API_URL_BASE + "/reply",
         };
         request.post(options);
     }
