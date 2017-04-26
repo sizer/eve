@@ -6,7 +6,7 @@
   "scripts": {
     "postinstall": "npm run compile",
     "clean": "rimraf ./dist",
-    "lint": "tslint -c ./tslint.json ./app/**/*.ts ./test/**/*.ts",
+    "lint": "tslint -c ./tslint.json ./app/**/*.ts ./test/**/*.ts -t stylish",
     "compile": "npm run clean && npm run lint && tsc -p ./tsconfig.json",
     "test": "npm run compile && mocha ./dist/test/**/*.test.js",
     "start": "npm run test && node ./dist/app/app.js"
