@@ -20,10 +20,11 @@ const lineApi = new LineMessagingApi(
 app.post("/callback", (req, res) => {
     if (!lineApi.isSignatureValid(req)) { res.status(403).send("invalid signature"); }
     const body: any = req.body;
-    if (lineApi.isTextMessage(body.events[0])) {
-        lineApi.sendTextMessage(body.events[0].message.text);
+    const firstEvent: any = body.events[0];
+    if (lineApi.isTextMessage(firstEvent)) {
+        lineApi.sendTextMessage(firstEvent.message.text, firstEvent.replyToken);
     } else {
-        lineApi.sendTextMessage("ごめんなさい、わかりませんでした。");
+        lineApi.sendTextMessage("ごめんなさい、メッセージが理解できませんでした。", firstEvent.replyToken);
     }
 });
 

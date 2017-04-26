@@ -22,9 +22,15 @@ export class LineMessagingApi {
             && event.message.type === "text";
     }
 
-    public sendTextMessage(message: string): void {
+    public sendTextMessage(message: string, replyToken: string): void {
         const options = {
-            body: {},
+            body: {
+                replyToken: replyToken,
+                messages: [{
+                    type: "text",
+                    text: message
+                }]
+            },
             headers: {
                 "Authorization": "Bearer " + this.channelAccessToken,
                 "Content-Type": "application/json; charset=UTF-8",
