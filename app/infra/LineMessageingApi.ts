@@ -25,11 +25,11 @@ export class LineMessagingApi {
     public sendTextMessage(message: string, replyToken: string): void {
         const options = {
             body: {
-                replyToken: replyToken,
                 messages: [{
+                    text: message,
                     type: "text",
-                    text: message
-                }]
+                }],
+                replyToken,
             },
             headers: {
                 "Authorization": "Bearer " + this.channelAccessToken,
