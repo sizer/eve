@@ -3,6 +3,7 @@ import * as request from "request";
 
 export class LineMessagingApi {
 
+    private static LINE_MESSAGE_API_URL_BASE: string = "https://api.line.me/v2/bot/message";
     private channelSecret: string;
     private channelAccessToken: string;
     constructor(channelSecret: string, channelAccessToken: string) {
@@ -36,7 +37,7 @@ export class LineMessagingApi {
                 "Content-Type": "application/json; charset=UTF-8",
             },
             json: true,
-            url: "https://trialbot-api.line.me/v1/events",
+            url: LineMessagingApi.LINE_MESSAGE_API_URL_BASE + "/reply",
         };
         request.post(options);
     }
