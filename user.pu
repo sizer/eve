@@ -1,0 +1,49 @@
+package "Domain Layer" #DDDDDD {
+  interface Readable<E extends Entity> {
+    # {abstract}findById(id: any): Promise<E>
+  }
+
+  interface Writable<E extends Entity> {
+    # {abstract}insert(entity: E): Promise<E>
+    # {abstract}update(entity: E): Promise<E>
+    # {abstract}delete(entity: E): Promise<boolean>
+  }
+
+  interface UserRepository<User> {
+    # {abstract}findByUsername(name: string): Promise<User>
+  }
+
+  class UserService {
+    - UserRepository repository
+
+    + createUser(name: string): User{}
+    + findUser(name: string): User{}
+  }
+
+  UserRepository –up-|> Readable
+  UserRepository –up-|> Writable
+  UserService -left-> UserRepository
+}
+
+package "Infrastracture Layer" #DDDDDD {
+  abstract RepositoryMongoBase<E extends Entity> {
+    # string collectionName;
+
+    # findById(id: any): Promise<E>{}
+    # insert(entity: E): Promise<E>{}
+    # update(entity: E): Promise<E>{}
+    # delete(entity: E): Promise<boolean>{}
+  }
+
+  class UserRepositoryMongo<User> {
+    # string collectionName = "user";
+
+    # findById(id: any): Promise<User>{}
+    # insert(entity: E): Promise<User>{}
+    # update(entity: E): Promise<User>{}
+    # delete(entity: E): Promise<boolean>{}
+    # findByUsername(name: string): Promise<User>{}
+  }
+  UserRepositoryMongo –up-|> RepositoryMongoBase
+}
+UserRepositoryMongo –up-|> UserRepository
