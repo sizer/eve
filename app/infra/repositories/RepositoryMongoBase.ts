@@ -17,50 +17,64 @@ export abstract class RepositoryMongoBase<E extends Entity> implements Readable<
         this.collectionName = collectionName;
     }
 
-    findById(_id: any): Promise<E> {
+    public findById(_id: any): Promise<E> {
         return this.getCollection()
             .then((collection) => {
                 return collection.findOne({ _id: _id })
             }).then((doc) => {
                 this._db.close();
                 return doc;
-            }).catch(function(err) {
+            }).catch((err) => {
                 console.log(err);
             });
     }
 
-    insert(entity: E): Promise<E> {
+    public insert(entity: E): Promise<E> {
         return this.getCollection()
             .then((collection) => {
                 return collection.insertOne(entity, {})
             }).then((doc) => {
                 this._db.close();
                 return entity;
-            }).catch(function(err) {
+            }).catch((err) => {
                 console.log(err);
             });
     }
-    update(entity: E): Promise<E> {
+
+    public update(entity: E): Promise<E> {
         return this.getCollection()
             .then((collection) => {
                 return collection.updateOne({ _id: entity.id })
             }).then((doc) => {
                 this._db.close();
                 return entity;
-            }).catch(function(err) {
+            }).catch((err) => {
                 console.log(err);
             });
     }
-    delete(entity: E): Promise<boolean> {
+
+    public delete(entity: E): Promise<boolean> {
         return this.getCollection()
             .then((collection) => {
                 return collection.updateOne({ _id: entity.id }, {})
             }).then((doc) => {
                 this._db.close();
                 return doc.ok === 1;
-            }).catch(function(err) {
+            }).catch((err) => {
                 console.log(err);
             });
+    }
+
+    protected findByQuery(query: Object): Promise<E[]> {
+        return this.getCollection()
+            .then((collection) => {
+                return collection.find(query).toArray()
+            }).then((docs) => {
+                this._db.close();
+                return docs;
+            }).catch((err) => {
+                console.log(err);
+            })
     }
 
     private getCollection(): Promise<any> {
