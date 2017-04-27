@@ -43,7 +43,7 @@ export abstract class RepositoryMongoBase<E extends Entity> implements Readable<
     update(entity: E): Promise<E> {
         return this.getCollection()
             .then((collection) => {
-                return collection.updateOne({ _id: entity._id })
+                return collection.updateOne({ _id: entity.id })
             }).then((doc) => {
                 this._db.close();
                 return entity;
@@ -54,7 +54,7 @@ export abstract class RepositoryMongoBase<E extends Entity> implements Readable<
     delete(entity: E): Promise<boolean> {
         return this.getCollection()
             .then((collection) => {
-                return collection.updateOne({ _id: entity._id }, {})
+                return collection.updateOne({ _id: entity.id }, {})
             }).then((doc) => {
                 this._db.close();
                 return doc.ok === 1;
