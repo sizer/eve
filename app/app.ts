@@ -1,5 +1,5 @@
 import { BotApplication } from "./application/BotApplication";
-import { ContactRepositoryMongo } from "./infra/repositories/contact/ContactRepositoryMongo";
+import { ContactRepositoryMongo } from "./infra/repositories/ContactRepositoryMongo";
 import { Contact } from "./domain/entities/contact/Contact";
 
 //new BotApplication().boot();
